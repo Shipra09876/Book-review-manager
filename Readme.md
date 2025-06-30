@@ -1,139 +1,228 @@
-📘 Book Review App
-A full-stack Book Review Management System built using Django Rest Framework and ReactJS (Material UI). Users can browse books and leave reviews (including name, comment, and rating).
+# Project Title
 
-🚀 Live Demo
-📽️ Walkthrough Video: [Insert your video link here]
+Book Review App A full-stack Book Review Management System built using Django Rest Framework and ReactJS (Material UI). Users can browse books and leave reviews (including name, comment, and rating)
 
-🧠 Features
-📚 Add book 
+## Demo
 
-📚 View all book details (title, author, date) and also update and delete 
+https://drive.google.com/file/d/1mfqKPzeZfvyKXlD1DqqrKRcPi4Li9NqG/view?usp=drive_link
+
+## Installation  
+
+### Enviornment setup 
+```bash
+    python3 -m venv env_name
+```
+
+### Backend project setup 
+```bash
+    django-admin startproject project_name .
+    cd project_name
+    python manage.py startapp app_name
+    python manage.py makemigrations
+    python manage.py migrate
+    python manage.py createsuperuser
+    python manage.py runserver
+```
+### Backend Installation 
+```bash
+    pip install django djangorestframework   
+    pip install psycopg2-binary
+    pip install django-cors-headers
+    pip install python-decouple drf-yasg
+
+```
+
+### Frontend project setup 
+```bash
+    npx create-react-app book-review-frontend
+    cd book-review-frontend
+    
+
+```
+### Backend Installation 
+```bash
+    npm install axios
+    npm install react-router-dom
+    npm install @mui/material @emotion/react    
+    @emotion/styled
+    npm install @mui/icons-material
+    npm install uuid
+
+```
+    
+## Environment Variables
+
+To run this project, you will need to add the following environment variables to your .env file
+
+### Django settings
+```bash
+SECRET_KEY='django-insecure-e(gp!4s9d0-qt+q4juxhwy2$8x#g$r8*i14*f83lj2hcdfsw&y'
+DEBUG=True
+```
+
+### Database (PostgreSQL)
+```bash
+DB_USER=sqlite3
+```
+
+### CORS
+``` bash
+ALLOWED_HOSTS=localhost,127.0.0.1
+CORS_ALLOWED_ORIGINS=http://localhost:3000
+```
+
+### Cache (optional)
+```bash
+REDIS_URL=redis://127.0.0.1:6379
+```
+## Features
+
+📚 Add book
+
+📚 View all book details (title, author, date) and also update and delete
 
 📝 Submit reviews (name, text, rating).
 
-🌟 See all reviews for a book. searching a book by title 
+🌟 See all reviews for a book. searching a book by title
 
 💾 Backend caching with Redis for faster access.
 
 ✅ RESTful API integration with clean UI.
 
-🔧 Tech Stack
-Frontend	ReactJS, Material UI, Axios
-Backend	Django, Django Rest Framework
-Database	Sqlite3
-Caching	Redis
-Deployment	(Optional) Heroku, Vercel
-API Testing	Postman / curl
 
-🗂️ Project Structure
+## API Reference
 
-📦 book-review-app/
-├── 📁 backend/
-│   ├── 📄 models.py
-│   ├── 📄 serializers.py
-│   ├── 📄 views.py
-│   ├── 📄 urls.py
-│   └── 📄 settings.py
-├── 📁 frontend/
-│   ├── 📁 src/
-│   │   ├── 📄 App.js
-│   │   ├── 📄 Api.js
-│   │   └── 📁 components/
-│   │       ├── 📄 BookDetails.js
-│   │       └── 📄 AddReview.js
-└── 📄 README.md
+#### Add Book
+
+```http://localhost:8000/
+  GET api/task/addbook/
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `title` | `string` | **Required**  |
+| `author` | `string` | **Required**  |
 
 
-⚙️ Setup Instructions
-🔹 1. Clone the Project
-git clone https://github.com/your-username/book-review-app.git
-cd book-review-app
+#### Get all books
 
-🔹 2. Backend Setup (Django)
-cd backend
-python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
+```http
+  GET /api/task/listbook/
+```
 
-🔹 3. pip install -r requirements.txt
-Django>=5.0,<6.0
-djangorestframework>=3.14.0
-psycopg2>=2.9.9
-django-cors-headers>=4.3.1
-django-redis>=5.4.0
-python-dotenv>=1.0.1
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | uuid | **Required**. Id of item to fetch |
 
-🔹 4. Migrations
-python manage.py makemigrations
-python manage.py migrate
 
-🔹 5 Run Server
-python manage.py runserver
-🌐 Running at: http://127.0.0.1:8000/
+#### delete book
 
-🔹 6. Frontend Setup (React)
-cd frontend
-npm install
-npm start
-🌐 Running at: http://localhost:3000/
+```http
+  DELETE /api/task/delete_book/{id}/
+```
 
-🔗 API Endpoints
-Method	Endpoint	Description
-GET	/api/task/listbook/	Get all books
-POST	/api/task/addbook/	Add a new book
-GET	/api/task/book_detail/<uuid:book_id>/	Get details of a single book
-PUT	/api/task/update_book/<uuid:book_id>/	Update book details
-DELETE	/api/task/delete_book/<uuid:book_id>/	Delete a book
-POST	/api/task/add-review/<uuid:book_id>/	Add a review for a book
-GET	/api/task/get_review/<uuid:book_id>/	Get all reviews for a book
-GET /api/task/book-reviews-by-title/  search book by its title
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | uuid | **Required**. Id of item to fetch |
 
-🧪 Testing
-You can test endpoints using:
-✅ Example: Add a Book (POST)
-POST /api/task/addbook/
-Content-Type: application/json
+#### UPDATE book
 
-{
-  "title": "Jai Ram",
-  "author": "Mahi"
-}
+```http
+  UPDATE /api/task/update_book/{id}/
+```
 
-✅ Example: Add a Review (POST)
-POST /api/task/add-review/<book_id>/
-Content-Type: application/json
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| title    | 'string' | **Required** |
+| author    | 'string' | **Required** |
 
-{
-  "reviewer_name": "Shipra",
-  "review_text": "Very informative!",
-  "rating": 5
-}
+#### To get the specific book detail
 
-✅ Example: Get Reviews (GET)
-GET /api/task/get_review/<book_id>/
+```http
+  GET /api/task/book_detail/{id}
+```
 
-💾 Redis Caching
-To use Redis for caching:
-# Install Redis on your system and start it
-redis-server
-Update Django settings.py:
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| id    | uuid | **Required** |
 
-python
-Copy
-Edit
-CACHES = {
-    "default": {
-        "BACKEND": "django.core.cache.backends.redis.RedisCache",
-        "LOCATION": "redis://127.0.0.1:6379/1",
-    }
-}
 
-💡 .env Variables (Optional)
-DEBUG=True
-SECRET_KEY=your-secret-key
-DATABASE_URL=postgres://user:password@localhost:5432/dbname
+#### Add a review
 
-👩‍💻 Author
-Shipra Gupta
-📧 shipra@example.com
-🔗 GitHub: @Shipra09876
+```http
+  POST /api/task/add-review/{id}/
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| reviewer_name | string | **Required** |
+| reviewer_text | string | **Required** |
+| rating | int | **Required** |
+
+
+#### Get a review
+
+```http
+  GET /api/task/get-review/{id}/
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| id | string | **Required** |
+
+
+#### Get a review of a book 
+
+```http
+  GET /api/task/get-review/{id}/
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| id | string | **Required** |
+
+
+
+#### Swagger api 
+
+```http
+  http://localhost:8000/swagger/
+```
+
+
+## Tech Stack 
+- Backend	: Django, Django REST Framework (DRF), UUID, Django Caching
+- Frontend	: React.js, Axios, Material UI (MUI)
+- Database	: SQLite 
+- API Docs	: drf-yasg (Swagger)
+- Caching	: Redis
+- UUIDs	    : For unique Book and Review IDs 
+
+
+## How it works
+- User adds book from frontend → saved in DB
+
+- User clicks details → sees book & review list
+
+- User submits review → updates via API
+
+- User updates or deletes books
+
+- Everything UUID-based
+
+- Caching used for optimizing review fetching
+
+- Clean design via React + MUI
+
+
+# Hi, I'm Shipra Gupta! 👋
+
+
+## 🚀 About Me
+I'm a full stack developer...
+
+
+## 🔗 Links
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/shipra-guptaa/)
+
 
