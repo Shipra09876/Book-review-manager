@@ -39,7 +39,7 @@ https://drive.google.com/file/d/1mfqKPzeZfvyKXlD1DqqrKRcPi4Li9NqG/view?usp=drive
     
 
 ```
-### Backend Installation 
+### Frontend Installation 
 ```bash
     npm install axios
     npm install react-router-dom
