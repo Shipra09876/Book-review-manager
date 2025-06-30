@@ -1,4 +1,4 @@
-# Project Title
+# Book Review Management System 
 
 Book Review App A full-stack Book Review Management System built using Django Rest Framework and ReactJS (Material UI). Users can browse books and leave reviews (including name, comment, and rating)
 
